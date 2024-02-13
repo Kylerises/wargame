@@ -1,0 +1,19 @@
+{
+    "name": "obeyance/wargame",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "obeyance"
+        }
+    ],
+    "minimum-stability": "beta",
+    "require": {
+        "altorouter/altorouter": "^2.0",
+        "filp/whoops": "^2.15"
+    }
+}
