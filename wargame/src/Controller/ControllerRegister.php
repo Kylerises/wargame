@@ -1,26 +1,31 @@
 <?php
+namespace App\Controller;
 
 use App\Model\ModelRegister;
-// on inclus le model
-require_once 'ModelRegister.php';
 
-// on vérifie si le formulaire à été soumis
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // on récupère les données du formulaires
-    $username = $_POST['username'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
+class ControllerRegister {
 
-    // on ajoute l'utilisateur dans la base de données
-    $db = new PDO('mysql:host=localhost;dbname=test', 'root', 'root');
-    $userModel = new ModelRegister($db);
-    $userModel->addUser($username, $email, $password);
+    public function showRegistrationForm() {
+        // on affiche la vue avec la fonction render
+        $this->render('register');
+    }
 
-    // on redirige l'utilisateur vers la page index
-    header("Location: index.php");
-    exit();
+    public function registerUser() {
+        // on récupère les données entrée par l'utilisateur
+        $username = htmlentities($_POST['username']);
+        $email = htmlentities($_POST['email']);
+        $password = htmlentities($_POST['password']);
+
+        // on l'ajoute dans la DB
+        $userModel = new ModelRegister();
+        $userModel->addUser($username, $email, $password);
+
+        // on le redirige vers index TODO
+        header("Location: index.php"); 
+        exit();
+    }
+
+    private function render($view) {
+        require_once __DIR__ . '/../View/' . $view . '.php';
+    }
 }
-
-// on affiche la vue
-$message = ''; // on affiche un message en cas de succés ou d'une erreur
-require_once 'register.php';

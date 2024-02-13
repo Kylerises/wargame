@@ -7,9 +7,7 @@
 </head>
 <body>
     <h2>Inscription</h2>
-    <?php if (!empty($message)) : ?>
-        <p><?= $message ?></p>
-    <?php endif; ?>
+
     <form method="POST" action="register.php">
         <label for="username">Nom d'utilisateur:</label><br>
         <input type="text" id="username" name="username"><br>
